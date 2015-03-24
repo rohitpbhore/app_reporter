@@ -1,0 +1,185 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Brakeman Report</title>
+    <script>
+      function toggle(context) {
+        var elem = document.getElementById(context);
+
+        if (elem.style.display != "block")
+          elem.style.display = "block";
+        else
+          elem.style.display = "none";
+
+        elem.parentNode.scrollIntoView();
+      }
+    </script>
+    <style>
+      /* CSS style used for HTML reports */
+
+      body {
+        font-family: sans-serif;
+        color: #161616;
+        width: 70%;
+        margin: auto;
+      }
+      th {
+         background-color: #980905;
+         border-bottom: 5px solid #530200;
+         color: white;
+         font-size: 11pt;
+         padding: 1px 8px 1px 8px;
+       }
+
+       td {
+         border-bottom: 2px solid white;
+         font-family: monospace;
+         padding: 5px 8px 1px 8px;
+       }
+
+       table {
+         background-color: #FCF4D4;
+         border-collapse: collapse;
+       }
+
+       tr.first {
+         border-top: 1px solid #7ecc54;
+         padding-top: 2px;
+       }
+
+       tr.error {
+        background-color: #f4c1c1 !important
+       }
+
+       table{
+        width: 100%;
+        border: 1px;
+        border-color: black;
+       }
+       th, td{
+        width: 33.33%;
+       }
+
+      .done {
+        list-style: none; /* remove normal bullet for done items */
+        position: relative; /* necessary for positioning the :after */
+        margin-left: 30px;
+      }
+
+      .done:after {
+        content: "";
+        background-color: transparent;
+        
+        /* position the checkbox */
+        position: absolute;
+        left: -16px;
+        top: 0px;
+
+        /* setting the checkbox */
+          /* short arm */
+        width: 5px;
+        border-bottom: 3px solid #4D7C2A;
+          /* long arm */
+        height: 11px;
+        border-right: 3px solid #4D7C2A;
+        
+        /* rotate the mirrored L to make it a checkbox */
+        transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+
+      .cross:after{
+        display: inline-block;
+        content: "\00d7"; /* This will render the 'X' */
+        font-size: 30px;
+        color: #4D7C2A;
+      }
+    </style>
+  </head>
+  <body>
+
+    <table>
+      <tr>
+        <% if brakeman_warnings.count > 1 %>
+          <td style="width:25%;"><span class='cross'></span>Brakeman Warnings(<%= brakeman_warnings.count %>)</td>
+        <% else %>
+          <td style="width:25%;"><span class='done'></span>Brakeman Warnings(<%= brakeman_warnings.count %>)</td>
+        <% end %>
+
+        <% if rails_best_practices_info.first['rails_best_practices'] > 50 %>
+          <td style="width:25%;"><span class='cross'></span>Rails Best Practices(<%= rails_best_practices_info.first['rails_best_practices'] %>)</td>
+        <% else %>
+          <td style="width:25%;"><span class='done'></span>Rails Best Practices(<%= rails_best_practices_info.first['rails_best_practices'] %>)</td>
+        <% end %>
+
+        <% if flog_info.first['flog'] > 5 %>
+          <td style="width:25%;"><span class='cross'></span>Flog(<%= flog_info.first['flog'] %>)</td>
+        <% else %>
+          <td style="width:25%;"><span class='done'></span>Flog(<%= flog_info.first['flog'] %>)</td>
+        <% end %>
+
+        <% if stats_info.first['stats'] == 0.0 %>
+          <td style="width:25%;"><span class='cross'></span>Stats</td>
+        <% else %>
+          <td style="width:25%;"><span class='done'></span>Stats</td>
+        <% end %>
+      </tr>
+    </table>
+
+    <p></p>
+
+    <h2>Brakeman Warnings</h2>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>File</th>
+        <th>Message</th>
+      </tr>
+
+      <% brakeman_warnings.each do |warning| %>
+        <tr>
+          <td><h4><%= warning['warning_type'] %></h4></td>
+          <td><%= warning['file'] %></td>
+          <td><%= warning['message'] %></td>
+        </tr>
+      <% end %>
+      <tr><td><a href="<%= app_root %>/report.html">Report</a></td></tr>
+    </table>
+    <p></p>
+
+    <h2>Rails Best Practices</h2>
+    <table>
+      <tr>
+        <td><a href="<%= app_root %>/tmp/metric_fu/output/rails_best_practices.html">Found <%= rails_best_practices_info.first['rails_best_practices'] %> issues.</a></td>
+      </tr>
+    </table>
+    <p></p>
+
+    <h2>Flog code complexity</h2>
+    <table>
+      <tr>
+        <td><a href="<%= app_root %>/tmp/metric_fu/output/flog.html">Average Flog score for all methods: <%= flog_info.first['flog'] %></a></td>
+      </tr>
+    </table>
+    <p></p>
+
+
+    <h2>Stats</h2>
+    <table>
+      <tr>
+        <td>
+          testLOC: <%= matric_fu_info.first['testLOC'] %>/
+          codeLOC: <%= matric_fu_info.first['codeLOC'] %>
+          </br>
+          <a href="<%= app_root %>/tmp/metric_fu/output/stats.html">Code to test ratio: <%= stats_info.first['stats'] %></a>
+        </td>
+      </tr>
+    </table>
+    <p></p>
+
+    <h2><%= "Generated on #{Time.now}" %></h2>
+  </body>
+</html>
