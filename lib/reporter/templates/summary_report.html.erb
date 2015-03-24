@@ -103,25 +103,25 @@
 
     <table>
       <tr>
-        <% if brakeman_warnings.count > 1 %>
-          <td style="width:25%;"><span class='cross'></span>Brakeman Warnings(<%= brakeman_warnings.count %>)</td>
+        <% if @brakeman_warnings.count > 1 %>
+          <td style="width:25%;"><span class='cross'></span>Brakeman Warnings(<%= @brakeman_warnings.count %>)</td>
         <% else %>
-          <td style="width:25%;"><span class='done'></span>Brakeman Warnings(<%= brakeman_warnings.count %>)</td>
+          <td style="width:25%;"><span class='done'></span>Brakeman Warnings(<%= @brakeman_warnings.count %>)</td>
         <% end %>
 
-        <% if rails_best_practices_info.first['rails_best_practices'] > 50 %>
-          <td style="width:25%;"><span class='cross'></span>Rails Best Practices(<%= rails_best_practices_info.first['rails_best_practices'] %>)</td>
+        <% if @rails_best_practices_info.first['rails_best_practices'] > 50 %>
+          <td style="width:25%;"><span class='cross'></span>Rails Best Practices(<%= @rails_best_practices_info.first['rails_best_practices'] %>)</td>
         <% else %>
-          <td style="width:25%;"><span class='done'></span>Rails Best Practices(<%= rails_best_practices_info.first['rails_best_practices'] %>)</td>
+          <td style="width:25%;"><span class='done'></span>Rails Best Practices(<%= @rails_best_practices_info.first['rails_best_practices'] %>)</td>
         <% end %>
 
-        <% if flog_info.first['flog'] > 5 %>
-          <td style="width:25%;"><span class='cross'></span>Flog(<%= flog_info.first['flog'] %>)</td>
+        <% if @flog_info.first['flog'] > 5 %>
+          <td style="width:25%;"><span class='cross'></span>Flog(<%= @flog_info.first['flog'] %>)</td>
         <% else %>
-          <td style="width:25%;"><span class='done'></span>Flog(<%= flog_info.first['flog'] %>)</td>
+          <td style="width:25%;"><span class='done'></span>Flog(<%= @flog_info.first['flog'] %>)</td>
         <% end %>
 
-        <% if stats_info.first['stats'] == 0.0 %>
+        <% if @stats_info.first['stats'] == 0.0 %>
           <td style="width:25%;"><span class='cross'></span>Stats</td>
         <% else %>
           <td style="width:25%;"><span class='done'></span>Stats</td>
@@ -139,21 +139,21 @@
         <th>Message</th>
       </tr>
 
-      <% brakeman_warnings.each do |warning| %>
+      <% @brakeman_warnings.each do |warning| %>
         <tr>
           <td><h4><%= warning['warning_type'] %></h4></td>
           <td><%= warning['file'] %></td>
           <td><%= warning['message'] %></td>
         </tr>
       <% end %>
-      <tr><td><a href="<%= app_root %>/report.html">Report</a></td></tr>
+      <tr><td><a href="<%= @app_root %>/report.html">Report</a></td></tr>
     </table>
     <p></p>
 
     <h2>Rails Best Practices</h2>
     <table>
       <tr>
-        <td><a href="<%= app_root %>/tmp/metric_fu/output/rails_best_practices.html">Found <%= rails_best_practices_info.first['rails_best_practices'] %> issues.</a></td>
+        <td><a href="<%= @app_root %>/tmp/metric_fu/output/rails_best_practices.html">Found <%= @rails_best_practices_info.first['rails_best_practices'] %> issues.</a></td>
       </tr>
     </table>
     <p></p>
@@ -161,7 +161,7 @@
     <h2>Flog code complexity</h2>
     <table>
       <tr>
-        <td><a href="<%= app_root %>/tmp/metric_fu/output/flog.html">Average Flog score for all methods: <%= flog_info.first['flog'] %></a></td>
+        <td><a href="<%= @app_root %>/tmp/metric_fu/output/flog.html">Average Flog score for all methods: <%= @flog_info.first['flog'] %></a></td>
       </tr>
     </table>
     <p></p>
@@ -171,10 +171,10 @@
     <table>
       <tr>
         <td>
-          testLOC: <%= matric_fu_info.first['testLOC'] %>/
-          codeLOC: <%= matric_fu_info.first['codeLOC'] %>
+          testLOC: <%= @matric_fu_info.first['testLOC'] %>/
+          codeLOC: <%= @matric_fu_info.first['codeLOC'] %>
           </br>
-          <a href="<%= app_root %>/tmp/metric_fu/output/stats.html">Code to test ratio: <%= stats_info.first['stats'] %></a>
+          <a href="<%= @app_root %>/tmp/metric_fu/output/stats.html">Code to test ratio: <%= @stats_info.first['stats'] %></a>
         </td>
       </tr>
     </table>
