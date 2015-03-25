@@ -1,34 +1,52 @@
 # AppReporter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/app_reporter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+AppReporter fetch data from the already generated application reports through brakeman and metric_fu. 
+Based on some thresholds it checks for some major areas like security issues, test coverage and Rails best practices etc.
+It generates HTML report in applications root folder once you run final command.
 
 ## Installation
+
+Install other required gems 
+
+``
+$ gem install brakeman
+$ gem install metric_fu
+``
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'app_reporter'
+gem 'app_reporter', '~> 1.0.0'
 ```
 
 And then execute:
 
-    $ bundle
+  $ bundle
 
 Or install it yourself as:
 
-    $ gem install app_reporter
+  $ gem install app_reporter
 
 ## Usage
 
-TODO: Write usage instructions here
+Run below commands
 
-## Development
+```
+	$ brakeman -o report.html -o report.json
+	$ metric_fu
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment. 
+TODO:: 
+1. Update passing and failing areas conditions into the templates.
+2. Make report template more attractive.
+3. Make it run the brakeman and metric_fu commands internally instead of manually.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Run AppReoprter
+
+```
+$ rake reporter:run
+```
+Check for the summary_report.html in root folder
 
 ## Contributing
 
