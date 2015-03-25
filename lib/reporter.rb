@@ -1,7 +1,7 @@
-require "reporter/version"
-require 'reporter/railtie' if defined?(Rails)
+require "app_reporter/version"
+require 'app_reporter/railtie' if defined?(Rails)
 
-module Reporter
+module AppReporter
   def brakeman_report
   	# Breakman source file
 		file = File.read("#{Rails.root}/report.json")
@@ -92,8 +92,8 @@ module Reporter
 	end
 
   def generate_final_report
-  	spec = Gem::Specification.find_by_name 'reporter'
-		erb_file = "/#{spec.gem_dir}/lib/reporter/templates/summary_report.html.erb"
+  	spec = Gem::Specification.find_by_name 'app_reporter'
+		erb_file = "/#{spec.gem_dir}/lib/app_reporter/templates/summary_report.html.erb"
 		html_file = File.basename(erb_file, '.erb') 
 		erb_str = File.read(erb_file)
 

@@ -1,9 +1,9 @@
 require 'erb'
 
-namespace :reporter do
+namespace :app_reporter do
   desc "Run Reporter"
   task :run do
-    extend Reporter
+    extend AppReporter
 		# Function call
 		p "===== Collecting data from brakeman report ====="
 		self.brakeman_report
