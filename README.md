@@ -37,6 +37,7 @@ Run below commands
 ```
 
 TODO:: 
+
 1. Update passing and failing areas conditions into the templates.
 2. Make report template more attractive.
 3. Make it run the brakeman and metric_fu commands internally instead of manually.
