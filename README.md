@@ -45,7 +45,7 @@ TODO::
 Run AppReoprter
 
 ```
-$ rake reporter:run
+$ rake app_reporter:run
 ```
 Check for the summary_report.html in root folder
 
