@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Brakeman Report</title>
+    <title>Application Report</title>
     <script>
       function toggle(context) {
         var elem = document.getElementById(context);
@@ -121,17 +121,17 @@
           <td style="width:25%;"><span class='done'></span>Flog(<%= @flog_info.first['flog'] %>)</td>
         <% end %>
 
-        <% if @stats_info.first['stats'] == 0.0 %>
-          <td style="width:25%;"><span class='cross'></span>Stats</td>
-        <% else %>
+        <% if @stats_info.first['stats'] == 1:1 %>
           <td style="width:25%;"><span class='done'></span>Stats</td>
+        <% else %>
+          <td style="width:25%;"><span class='cross'></span>Stats</td>
         <% end %>
       </tr>
     </table>
 
     <p></p>
 
-    <h2>Brakeman Warnings</h2>
+    <h2>Brakeman Security Warnings</h2>
     <table>
       <tr>
         <th>Type</th>

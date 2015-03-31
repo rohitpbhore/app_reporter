@@ -8,7 +8,7 @@ It generates HTML report in applications root folder once you run final command.
 
 Install other required gems 
 
-``
+```
 $ gem install brakeman
 $ gem install metric_fu
 ``
@@ -21,11 +21,15 @@ gem 'app_reporter', '~> 1.0.0'
 
 And then execute:
 
+```
   $ bundle
+```
 
 Or install it yourself as:
 
+```
   $ gem install app_reporter
+```
 
 ## Usage
 
@@ -35,6 +39,8 @@ Run below commands
 	$ brakeman -o report.html -o report.json
 	$ metric_fu
 ```
+
+### app_reporter is not yet ready for use but still you can use it for testing purpose.
 
 TODO:: 
 
